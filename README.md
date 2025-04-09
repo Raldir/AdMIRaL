@@ -1,7 +1,7 @@
 # Description
 
 This repository maintains the code for **AdMIRaL**, with the associated EMNLP 2022 paper: [Natural Logic-guided Autoregressive Multi-hop Document Retrieval
-for Fact Verification](https://arxiv.org/abs/2406.13124).
+for Fact Verification](https://aclanthology.org/2022.emnlp-main.411.pdf).
 
 > A key component of fact verification is the evidence retrieval, often from multiple documents. Recent approaches use dense representations and condition the retrieval of each document on the previously retrieved ones. The latter step is performed over all the documents in the collection, requiring storing their dense representations in an index, thus incurring a high memory footprint. An alternative paradigm is retrieve-and-rerank, where  documents are retrieved using methods such as BM25, their sentences are reranked, and further documents are retrieved  conditioned on these sentences, reducing the memory requirements. However, such approaches can be brittle as they rely on heuristics and assume hyperlinks between documents. We propose a novel retrieve-and-rerank method for multi-hop retrieval, that consists of a retriever that 
 jointly scores documents in the knowledge source and sentences from previously retrieved documents using an autoregressive formulation and is guided by a proof system based on natural logic that dynamically terminates the retrieval process if the evidence is deemed sufficient. This method is competitive with current state-of-the-art methods on FEVER, HoVer and FEVEROUS-S, while using $5$ to $10$ times less memory than competing systems. Evaluation on an adversarial dataset indicates improved stability of our approach compared to commonly deployed threshold-based methods. Finally, the proof system helps humans predict model decisions correctly more often than using the evidence alone.
@@ -72,7 +72,7 @@ If you want to speed up the retrieval process and maximize recall, at the cost o
 
 # Notes
 
-This repository is a complete reimplementation of the original codebase and therefore deviates slightly from the paper, largely for simplification:
+This repository is a reimplementation of the original codebase and deviates slightly from the paper, largely for simplification:
 - Instead of using the [Stammbach retriever](https://github.com/dominiksinsaarland/document-level-FEVER) for FEVER, we use a T5-reranker. The retrieval scores on FEVER are thus slightly lower. However, using a T5-reranker makes the codebase more flexibility, e.g. to incorporate longer documents (as needed for datasets like FEVEROUS). Please reach out to me if you want the retrieval results for FEVER shown in the paper.
 - We only keep track of the top i=1 D^i_t document set at a given iteration. Since most evaluation metrics consider recall@k with k >> 1, we fill up with documents d_t selected in the current iteration. 
 
